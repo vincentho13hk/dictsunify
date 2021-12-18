@@ -28,7 +28,9 @@ export const createScreenshots = async (
   word: string
 ): Promise<{ create: boolean; error?: string }> => {
   if (dictionary === "macmillan") {
-    const browser = await Puppeteer.launch();
+    const browser = await Puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     const page = await browser.newPage();
     await page.goto("https://www.macmillandictionary.com/", {
       waitUntil: "networkidle2",
@@ -69,7 +71,9 @@ export const createScreenshots = async (
       };
     }
   } else if (dictionary === "wordreference_enzh") {
-    const browser = await Puppeteer.launch();
+    const browser = await Puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     const page = await browser.newPage();
     await page.goto("https://www.wordreference.com/enzh/", {
       waitUntil: "networkidle2",
@@ -110,7 +114,9 @@ export const createScreenshots = async (
       };
     }
   } else if (dictionary === "etymonline") {
-    const browser = await Puppeteer.launch();
+    const browser = await Puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     const page = await browser.newPage();
     await page.goto("https://www.etymonline.com/", {
       waitUntil: "networkidle2",
@@ -137,7 +143,9 @@ export const createScreenshots = async (
       };
     }
   } else if (dictionary === "wordreference_englishusage") {
-    const browser = await Puppeteer.launch();
+    const browser = await Puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    });
     const page = await browser.newPage();
     await page.goto("https://www.wordreference.com/EnglishUsage/", {
       waitUntil: "networkidle2",
@@ -236,7 +244,9 @@ const tryToCaptureScreenshot = async (
   element: string,
   delay?: number
 ): Promise<{ create: boolean; error?: string }> => {
-  const browser = await Puppeteer.launch();
+  const browser = await Puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
   await page.goto(url, {
     waitUntil: "networkidle2",
