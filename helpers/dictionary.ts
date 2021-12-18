@@ -7,6 +7,14 @@ import dictionaryConfig from "../config/dictionary_config.json";
 import AdblockPlugin from "puppeteer-extra-plugin-adblocker";
 const screenshotsPath = screenshotConfig.path;
 Puppeteer.use(AdblockPlugin());
+
+const puppeteerLaunchArgs = [
+  "--no-sandbox",
+  "--disable-setuid-sandbox",
+  "--disable-dev-shm-usage",
+  "--single-process",
+];
+
 export const findScreenshots = (
   dictionary: string,
   word: string
@@ -29,7 +37,7 @@ export const createScreenshots = async (
 ): Promise<{ create: boolean; error?: string }> => {
   if (dictionary === "macmillan") {
     const browser = await Puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args: puppeteerLaunchArgs,
     });
     const page = await browser.newPage();
     await page.goto("https://www.macmillandictionary.com/", {
@@ -72,7 +80,7 @@ export const createScreenshots = async (
     }
   } else if (dictionary === "wordreference_enzh") {
     const browser = await Puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args: puppeteerLaunchArgs,
     });
     const page = await browser.newPage();
     await page.goto("https://www.wordreference.com/enzh/", {
@@ -115,7 +123,7 @@ export const createScreenshots = async (
     }
   } else if (dictionary === "etymonline") {
     const browser = await Puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args: puppeteerLaunchArgs,
     });
     const page = await browser.newPage();
     await page.goto("https://www.etymonline.com/", {
@@ -144,7 +152,7 @@ export const createScreenshots = async (
     }
   } else if (dictionary === "wordreference_englishusage") {
     const browser = await Puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args: puppeteerLaunchArgs,
     });
     const page = await browser.newPage();
     await page.goto("https://www.wordreference.com/EnglishUsage/", {
@@ -245,7 +253,7 @@ const tryToCaptureScreenshot = async (
   delay?: number
 ): Promise<{ create: boolean; error?: string }> => {
   const browser = await Puppeteer.launch({
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: puppeteerLaunchArgs,
   });
   const page = await browser.newPage();
   await page.goto(url, {
