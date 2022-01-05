@@ -13,7 +13,7 @@ import screenshotConfig from "./config/screenshot_config.json";
 const { json, urlencoded } = express;
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const screenshotsPath = screenshotConfig.path;
 // CORS
 const allowedOrigins = ["http://localhost:3001"];
